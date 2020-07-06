@@ -1,0 +1,389 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "DreamOle 2020 Service",
+    "version": "1.0.0",
+    "title": "DreamOle 2020 Service"
+  },
+  "host": "gmodica-dreamole2020.herokuapp.com",
+  "basePath": "/api",
+  "security": [
+    {
+      "BasicAuth": []
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "account",
+      "description": "Account API"
+    },
+    {
+      "name": "invoice",
+      "description": "Invoice API"
+    }
+  ],
+  "paths": {
+    "/invoice": {
+      "get": {
+        "tags": [
+          "invoice"
+        ],
+        "summary": "Gets all invoices",
+        "description": "Returns all the invoices in the system",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Invoice"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "invoice"
+        ],
+        "summary": "Creates or updates an invoice",
+        "description": "Creates an invoice, but if the invoice number exists then it updates it",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Invoice object that needs to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Invoice created"
+          },
+          "204": {
+            "description": "Invoice updated"
+          },
+          "404": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/invoice/{invoiceId}": {
+      "get": {
+        "tags": [
+          "invoice"
+        ],
+        "summary": "Gets an invoice",
+        "description": "Returns a single invoice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "invoiceId",
+            "in": "path",
+            "description": "Id of the invoice to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice returned",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Invoice not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "invoice"
+        ],
+        "summary": "Updates an invoice",
+        "description": "Updates an invoice given its Id",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Invoice data that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          },
+          {
+            "in": "path",
+            "name": "invoiceId",
+            "description": "Id of the invoice to update",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice created"
+          },
+          "404": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "invoice"
+        ],
+        "summary": "Deletes an invoice",
+        "description": "Deletes an invoice given its Id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "invoiceId",
+            "description": "Id of the invoice to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice deleted"
+          }
+        }
+      }
+    },
+    "/account": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Gets all accounts",
+        "description": "Returns all the accounts in the system",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Account"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Creates or updates an account",
+        "description": "Creates an account, but if the account number exists then it updates it",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Account object that needs to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Account created"
+          },
+          "204": {
+            "description": "Account updated"
+          },
+          "404": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/account/{accountId}": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Gets an account",
+        "description": "Returns a single account",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "Id of the account to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account returned",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Account not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Updates an account",
+        "description": "Updates an account given its Id",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Account data that needs to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "Id of the account to update",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account created"
+          },
+          "404": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Deletes an account",
+        "description": "Deletes an account given its Id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "description": "Id of the account to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account deleted"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Invoice": {
+      "type": "object",
+      "properties": {
+        "invoice_number": {
+          "type": "string"
+        },
+        "invoice_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customer_id": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "currency"
+        }
+      },
+      "xml": {
+        "name": "Invoice"
+      }
+    },
+    "Account": {
+      "type": "object",
+      "properties": {
+        "sfid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "customer_id": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Invoice"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "BasicAuth": {
+      "type": "basic"
+    }
+  }
+}

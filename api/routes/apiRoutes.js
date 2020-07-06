@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = function(app) {
 	var accountController = require('../controllers/accountControllers');
 	var invoiceController = require('../controllers/invoiceControllers');
